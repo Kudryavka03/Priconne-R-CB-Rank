@@ -28,18 +28,64 @@
         <tbody>
         </tbody>
     </table>
-    <script>
-    Papa.parse('./Rank.csv', {
-        download: true,
-        complete: function(results) {
-            var data = results.data, html;
-            for(var i = 1, _l = data.length-1; i < _1; i++) {
-                var item = data[i];
-                html += '<tr><td>'+item[0].ToString()+'</td><td>'+item[1].ToString()+'</td><td>'+item[2].ToString()+'</td><td>'+item[3].ToString()+'</td></tr>';
-            }
-            $('#table tbody').append(html);
-        }
-    });
-    </script>
+    <script type="text/javascript">
+
+          mtr = document.getElementById("table") ;
+
+ 
+
+          //使用ajax加载csv文件的数据
+
+          $.ajax({
+
+                  url: "./Rank.csv",
+
+                  success: function(result) {
+
+                  frag = document.createDocumentFragment();
+
+ 
+
+                  // 对csv文件的数据先以行分割
+
+                  userList = result.split("\n");
+
+               
+
+                // 我们在对每一行以逗号作分割
+
+                  for(i=0;i<userList.length;i++){
+
+                  userary = userList[i].split(",");
+
+                  tr = document.createElement("tr");
+
+             
+
+                    // 对每行的内容遍历到td标签去
+
+                  for(j = 0;j<userary.length;j++){
+
+                           td = document.createElement("td");
+
+                           td.append(userary[j]);
+
+                          tr.appendChild(td);
+
+              }
+
+             frag.appendChild(tr);
+
+          }
+
+          // 加载到web页面
+
+           mtr.appendChild(frag);
+
+     }
+
+});
+
+</script>
 </body>
 </html>
