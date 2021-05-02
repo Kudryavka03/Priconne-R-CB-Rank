@@ -33,9 +33,9 @@
         download: true,
         complete: function(results) {
             var data = results.data, html;
-            for(var i = 0, _l = data.length-1; i < _0; i++) {
+            for(var i = 1, _l = data.length-1; i < _1; i++) {
                 var item = data[i];
-                html += '<tr><td>'+item[0].substring(1)+'</td><td>'+item[1].substring(1)+'</td><td>'+item[2].substring(1)+'</td><td>'+item[3].substring(1)+'</td></tr>';
+                html += '<tr><td>'+item[0].substring(0)+'</td><td>'+item[1].substring(0)+'</td><td>'+item[2].substring(0)+'</td><td>'+item[3].substring(0)+'</td></tr>';
             }
             $('#table tbody').append(html);
         }
