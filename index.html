@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>csv</title>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="./papaparse.min.js"></script>
+    <style>
+        html,body{
+            font-size: 14px;
+            font-family: 'Microsoft Yahei',Tahoma,Verdana,simsun,sans-serif;
+        }
+        table {width: 85%;margin: 30px auto;}
+    </style>
+</head>
+<body>
+    <table id="table" border="1">
+        <caption>EN Server Priconne R Clan Battle Rank[1-2000]</caption>
+        <caption>Ctrl + F to query data...</caption>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Clan</th>
+                <th>Damage</th>
+                <th>Leader</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+    Papa.parse('./Rank.csv', {
+        download: true,
+        complete: function(results) {
+            var data = results.data, html;
+            for(var i = 1, _l = data.length-1; i < _l; i++) {
+                var item = data[i];
+                html += '<tr><td>'+item[0].substring(1)+'</td><td>'+item[1].substring(1)+'</td><td>'+item[2].substring(1)+'</td><td>'+item[3].substring(1)+'</td></tr>';
+            }
+            $('#table tbody').append(html);
+        }
+    });
+    </script>
+</body>
+</html>
